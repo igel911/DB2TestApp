@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    tools:showIn="@layout/activity_main">
+
+    <TextView
+        android:id="@+id/text_view_bank_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Hello World!"
+        android:textSize="@dimen/material_text_size_normal" />
+
+    <ImageView
+        android:id="@+id/image_view_calendar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/calendar_icon_description"
+        android:src="@drawable/ic_calendar" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/material_padding_normal"
+        android:text="@string/calendar_text"
+        android:textColor="@color/yellow"
+        android:textSize="@dimen/material_text_size_normal" />
+
+</LinearLayout>

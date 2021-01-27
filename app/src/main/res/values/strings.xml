@@ -4,4 +4,7 @@
     <string name="calendar_text"><u>01.01.2015</u>.</string>
     <string name="nbu_name">НБУ</string>
     <string name="pb_name">ПриватБанк</string>
+    <string name="tv_currency">Валюта</string>
+    <string name="tv_purchase_rate">Покупка</string>
+    <string name="tv_sale_rate">Продажа</string>
 </resources>

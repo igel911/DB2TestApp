@@ -3,6 +3,7 @@ package com.db2testapp
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
+import com.db2testapp.adapters.NbuAdapter
 import com.db2testapp.adapters.PbAdapter
 import com.db2testapp.adapters.PbItemDecorator
 import com.db2testapp.databinding.ActivityMainBinding
@@ -29,7 +30,7 @@ class MainActivity : AppCompatActivity() {
                 addItemDecoration(PbItemDecorator())
             }
             binding.recyclerViewNbu.apply {
-                adapter = PbAdapter(it)
+                adapter = NbuAdapter(it)
                 addItemDecoration(PbItemDecorator())
             }
         }

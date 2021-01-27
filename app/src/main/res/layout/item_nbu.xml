@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/item_parent">
+
+    <TextView
+        android:id="@+id/item_text_view_currency"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+        tools:text="Currency" />
+
+    <TextView
+        android:id="@+id/item_text_view_purchaseRate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        tools:text="PurchaseRate" />
+
+    <TextView
+        android:id="@+id/item_text_view_saleRate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/item_text_view_purchaseRate"
+        android:layout_alignEnd="@id/item_text_view_purchaseRate"
+        tools:text="SaleRate" />
+
+</RelativeLayout>

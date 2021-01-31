@@ -1,11 +1,11 @@
-package com.db2testapp.adapters
+package com.db2testapp.adapter
 
 import android.graphics.Rect
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.db2testapp.R
 
-class PbItemDecorator : RecyclerView.ItemDecoration() {
+class ItemDecoratorBank : RecyclerView.ItemDecoration() {
 
     override fun getItemOffsets(
         outRect: Rect,

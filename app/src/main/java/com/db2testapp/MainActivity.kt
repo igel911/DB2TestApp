@@ -1,20 +1,20 @@
 package com.db2testapp
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
-import com.db2testapp.adapters.NbuAdapter
-import com.db2testapp.adapters.PbAdapter
-import com.db2testapp.adapters.PbItemDecorator
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.RecyclerView
+import com.db2testapp.adapter.BaseBankAdapter
+import com.db2testapp.adapter.NbuAdapter
+import com.db2testapp.adapter.PbAdapter
+import com.db2testapp.adapter.ItemDecoratorBank
 import com.db2testapp.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityMainBinding
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
+        val binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         binding.includeHeaderPb.textViewBankName.text = getString(R.string.pb_name)
@@ -24,17 +24,37 @@ class MainActivity : AppCompatActivity() {
         binding.includeHeaderNbu.imageViewCalendar.setOnClickListener { }
 
         val viewModel: MainViewModel by viewModels()
-        viewModel.mLiveData.observe(this@MainActivity) {
+
+        viewModel.liveDataPb.observe(this@MainActivity) {
+            val pbAdapter = PbAdapter(it) { currency ->
+                setSelectedItem(binding.recyclerViewNbu, currency)
+            }
             binding.recyclerViewPb.apply {
-                adapter = PbAdapter(it)
-                addItemDecoration(PbItemDecorator())
+                adapter = pbAdapter
+                addItemDecoration(ItemDecoratorBank())
+            }
+        }
+
+        viewModel.liveDataNbu.observe(this@MainActivity) {
+            val nbuAdapter = NbuAdapter(it) { currency ->
+                setSelectedItem(binding.recyclerViewPb, currency)
             }
             binding.recyclerViewNbu.apply {
-                adapter = NbuAdapter(it)
-                addItemDecoration(PbItemDecorator())
+                adapter = nbuAdapter
+                addItemDecoration(ItemDecoratorBank())
             }
         }
         viewModel.getBankCourses()
+    }
 
+    private fun setSelectedItem(recyclerView: RecyclerView, currency: String) {
+        val adapter = recyclerView.adapter as BaseBankAdapter
+        val itemIndex = adapter.getItemIndexByCurrency(currency)
+        if (itemIndex >= 0) {
+            recyclerView.scrollToPosition(itemIndex)
+            adapter.setItemSelected(itemIndex)
+        } else {
+            adapter.clearSelection()
+        }
     }
 }

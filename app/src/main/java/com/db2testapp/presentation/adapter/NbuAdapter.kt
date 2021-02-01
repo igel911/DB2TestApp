@@ -1,11 +1,11 @@
-package com.db2testapp.adapter
+package com.db2testapp.presentation.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.db2testapp.R
 import com.db2testapp.databinding.ItemNbuBinding
-import com.db2testapp.model.NbuItem
+import com.db2testapp.data.vo.NbuItem
 
 class NbuAdapter(
     dataSet: List<NbuItem>,
@@ -24,8 +24,8 @@ class NbuAdapter(
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         val item = dataSet[position] as NbuItem
         viewHolder.binding.itemTextViewCurrency.text = item.currency
-        viewHolder.binding.itemTextViewPurchaseRate.text = item.purchaseRate
-        viewHolder.binding.itemTextViewSaleRate.text = item.saleRate
+        viewHolder.binding.itemTextViewPurchaseRate.text = item.currencyName
+        viewHolder.binding.itemTextViewSaleRate.text = item.rate
 
         val color = if (item.isSelected) {
             R.color.dark_gray

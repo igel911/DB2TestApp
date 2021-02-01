@@ -1,4 +1,4 @@
-package com.db2testapp.adapter
+package com.db2testapp.presentation.adapter
 
 import android.graphics.Rect
 import android.view.View

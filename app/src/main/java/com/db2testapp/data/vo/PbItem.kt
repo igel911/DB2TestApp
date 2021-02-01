@@ -1,6 +1,7 @@
-package com.db2testapp.model
+package com.db2testapp.data.vo
 
-class PbItem(currency: String,
+class PbItem(
+    currency: String,
     val purchaseRate: String,
     val saleRate: String,
     isSelected: Boolean = false

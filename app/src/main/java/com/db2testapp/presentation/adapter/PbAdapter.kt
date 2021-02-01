@@ -1,10 +1,10 @@
-package com.db2testapp.adapter
+package com.db2testapp.presentation.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.db2testapp.R
-import com.db2testapp.model.PbItem
+import com.db2testapp.data.vo.PbItem
 import com.db2testapp.databinding.ItemPbBinding
 
 class PbAdapter(

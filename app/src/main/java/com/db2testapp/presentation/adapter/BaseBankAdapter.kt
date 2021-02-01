@@ -1,7 +1,7 @@
-package com.db2testapp.adapter
+package com.db2testapp.presentation.adapter
 
 import androidx.recyclerview.widget.RecyclerView
-import com.db2testapp.model.BankItem
+import com.db2testapp.data.vo.BankItem
 
 abstract class BaseBankAdapter<T : RecyclerView.ViewHolder>(
     val dataSet: List<BankItem>,

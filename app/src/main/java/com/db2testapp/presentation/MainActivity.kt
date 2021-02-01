@@ -1,13 +1,14 @@
-package com.db2testapp
+package com.db2testapp.presentation
 
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
-import com.db2testapp.adapter.BaseBankAdapter
-import com.db2testapp.adapter.NbuAdapter
-import com.db2testapp.adapter.PbAdapter
-import com.db2testapp.adapter.ItemDecoratorBank
+import com.db2testapp.R
+import com.db2testapp.presentation.adapter.BaseBankAdapter
+import com.db2testapp.presentation.adapter.NbuAdapter
+import com.db2testapp.presentation.adapter.PbAdapter
+import com.db2testapp.presentation.adapter.ItemDecoratorBank
 import com.db2testapp.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {

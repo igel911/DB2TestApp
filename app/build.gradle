@@ -15,6 +15,9 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField 'String', 'PB_BASE_URL', '"https://api.privatbank.ua/p24api/"'
+        buildConfigField 'String', 'NBU_BASE_URL', '"https://bank.gov.ua/NBUStatService/v1/statdirectory/"'
     }
 
     buildTypes {
@@ -55,7 +58,11 @@ dependencies {
     //Kotlin coroutines
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$androidCoroutinesVersion"
 
-
+    //Retrofit
+    implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
+    implementation "com.google.code.gson:gson:$gsonVersion"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
+    implementation "com.squareup.okhttp3:logging-interceptor:$logInterseptorVersion"
 
 
     testImplementation "junit:junit:$junitVersion"

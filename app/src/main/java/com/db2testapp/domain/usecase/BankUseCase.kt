@@ -6,11 +6,11 @@ import com.db2testapp.domain.repository.BankRepository
 
 class BankUseCase(private val repository: BankRepository) {
 
-    fun getPbItems(): List<PbItem> {
+    suspend fun getPbItems(): List<PbItem> {
         return repository.getPbItems()
     }
 
-    fun getNbuItems(): List<NbuItem> {
+    suspend fun getNbuItems(): List<NbuItem> {
         return repository.getNbuItems()
     }
 }

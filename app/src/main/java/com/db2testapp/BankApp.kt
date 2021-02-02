@@ -1,6 +1,7 @@
 package com.db2testapp
 
 import android.app.Application
+import com.db2testapp.data.repository.BankApiRepository
 import com.db2testapp.data.repository.BankMockRepository
 import com.db2testapp.domain.usecase.BankUseCase
 
@@ -14,6 +15,6 @@ class BankApp : Application() {
     companion object {
         var instance: BankApp? = null
             private set
-        val bankUseCase = BankUseCase(BankMockRepository.getInstance())
+        val bankApiRepository = BankApiRepository()
     }
 }

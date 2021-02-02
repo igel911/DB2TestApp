@@ -19,12 +19,12 @@ class BankMockRepository : BankRepository {
         return MutableList(15) { NbuDto("ABC${it + 10}", "123+$it", 321.0 + it) }
     }
 
-    override fun getPbItems(): List<PbItem> {
+    override suspend  fun getPbItems(): List<PbItem> {
         val dto = PbResponseDto(getPBCourses())
         return PbMapper.toValueObject(dto)
     }
 
-    override fun getNbuItems(): List<NbuItem> {
+    override suspend fun getNbuItems(): List<NbuItem> {
         return NbuMapper.toValueObject(getNBUCourses())
     }
 

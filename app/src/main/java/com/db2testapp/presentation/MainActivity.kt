@@ -4,12 +4,10 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
+import com.db2testapp.BankApp
 import com.db2testapp.R
-import com.db2testapp.presentation.adapter.BaseBankAdapter
-import com.db2testapp.presentation.adapter.NbuAdapter
-import com.db2testapp.presentation.adapter.PbAdapter
-import com.db2testapp.presentation.adapter.ItemDecoratorBank
 import com.db2testapp.databinding.ActivityMainBinding
+import com.db2testapp.presentation.adapter.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -24,7 +22,7 @@ class MainActivity : AppCompatActivity() {
         binding.includeHeaderPb.imageViewCalendar.setOnClickListener { }
         binding.includeHeaderNbu.imageViewCalendar.setOnClickListener { }
 
-        val viewModel: MainViewModel by viewModels()
+        val viewModel: MainViewModel by viewModels { MainViewModelFactory(BankApp.bankApiRepository) }
 
         viewModel.liveDataPb.observe(this@MainActivity) {
             val pbAdapter = PbAdapter(it) { currency ->

@@ -23,9 +23,9 @@ class NbuAdapter(
 
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         val item = dataSet[position] as NbuItem
-        viewHolder.binding.itemTextViewCurrency.text = item.currency
-        viewHolder.binding.itemTextViewPurchaseRate.text = item.currencyName
-        viewHolder.binding.itemTextViewSaleRate.text = item.rate
+        viewHolder.binding.itemTextViewCurrency.text = item.currencyName
+        viewHolder.binding.itemTextViewPurchaseRate.text = item.rate
+        viewHolder.binding.itemTextViewBaseCurrency.text = item.baseCurrencyName
 
         val color = if (item.isSelected) {
             R.color.dark_gray

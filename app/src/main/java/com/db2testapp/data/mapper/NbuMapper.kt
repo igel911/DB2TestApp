@@ -10,10 +10,19 @@ object NbuMapper {
     }
 
     private fun toValueObject(dto: NbuDto): NbuItem {
+        var finalRate = dto.rate ?: 0.00
+        val baseCurrencyCount = if (finalRate > 1.0) {
+            "1"
+        } else {
+            finalRate *= 100
+            "100"
+        }
+
         return NbuItem(
             currency = dto.currency ?: "",
             currencyName = dto.currencyName ?: "",
-            rate = dto.rate?.toString() ?: 0.0.toString()
+            baseCurrencyName = baseCurrencyCount.plus(dto.currency),
+            rate = String.format("%.2f", finalRate).plus("UAH")
         )
     }
 }

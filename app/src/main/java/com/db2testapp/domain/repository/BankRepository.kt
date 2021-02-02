@@ -4,7 +4,7 @@ import com.db2testapp.data.vo.NbuItem
 import com.db2testapp.data.vo.PbItem
 
 interface BankRepository {
-    fun getPbItems(): List<PbItem>
+    suspend fun getPbItems(): List<PbItem>
 
-    fun getNbuItems(): List<NbuItem>
+    suspend fun getNbuItems(): List<NbuItem>
 }

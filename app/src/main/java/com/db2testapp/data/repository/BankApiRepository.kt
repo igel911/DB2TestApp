@@ -9,13 +9,13 @@ import com.db2testapp.domain.repository.BankRepository
 
 class BankApiRepository : BankRepository {
 
-    override suspend fun getPbItems(): List<PbItem> {
-        val dto = BankApiClient.pbApiClient.getPbItems()
+    override suspend fun getPbItems(date: String): List<PbItem> {
+        val dto = BankApiClient.pbApiClient.getPbItems(date = date)
         return PbMapper.toValueObject(dto)
     }
 
-    override suspend fun getNbuItems(): List<NbuItem> {
-        val dtoList = BankApiClient.nbuApiClient.getNbuItems()
+    override suspend fun getNbuItems(date: String): List<NbuItem> {
+        val dtoList = BankApiClient.nbuApiClient.getNbuItems(date = date)
         return NbuMapper.toValueObject(dtoList)
     }
 

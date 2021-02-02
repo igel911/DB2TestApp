@@ -1,28 +1,46 @@
-package com.db2testapp.presentation
+package com.db2testapp.presentation.main
 
+import android.app.DatePickerDialog
 import android.os.Bundle
+import android.text.SpannableString
+import android.text.style.UnderlineSpan
+import android.widget.DatePicker
+import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.db2testapp.BankApp
 import com.db2testapp.R
 import com.db2testapp.databinding.ActivityMainBinding
+import com.db2testapp.presentation.DatePickerFragment
+import com.db2testapp.presentation.MainViewModelFactory
 import com.db2testapp.presentation.adapter.*
 
-class MainActivity : AppCompatActivity() {
+
+class MainActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
+
+    private lateinit var binding: ActivityMainBinding
+    private val viewModel: MainViewModel by viewModels {
+        MainViewModelFactory(BankApp.bankApiRepository)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val binding = ActivityMainBinding.inflate(layoutInflater)
+        binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         binding.includeHeaderPb.textViewBankName.text = getString(R.string.pb_name)
         binding.includeHeaderNbu.textViewBankName.text = getString(R.string.nbu_name)
 
-        binding.includeHeaderPb.imageViewCalendar.setOnClickListener { }
-        binding.includeHeaderNbu.imageViewCalendar.setOnClickListener { }
+        binding.includeHeaderPb.imageViewCalendar.setOnClickListener {
+            val newFragment = DatePickerFragment()
+            newFragment.show(supportFragmentManager, "datePickerPb")
+        }
+        binding.includeHeaderNbu.imageViewCalendar.setOnClickListener {
+            val newFragment = DatePickerFragment()
+            newFragment.show(supportFragmentManager, "datePickerNbu")
 
-        val viewModel: MainViewModel by viewModels { MainViewModelFactory(BankApp.bankApiRepository) }
+        }
 
         viewModel.liveDataPb.observe(this@MainActivity) {
             val pbAdapter = PbAdapter(it) { currency ->
@@ -46,6 +64,12 @@ class MainActivity : AppCompatActivity() {
         viewModel.getBankCourses()
     }
 
+    override fun onDateSet(view: DatePicker, year: Int, month: Int, day: Int) {
+        setDateToTextView(binding.includeHeaderPb.textViewDate, year, month, day)
+        setDateToTextView(binding.includeHeaderNbu.textViewDate, year, month, day)
+        viewModel.getBankCoursesByDate(year, month, day)
+    }
+
     private fun setSelectedItem(recyclerView: RecyclerView, currency: String) {
         val adapter = recyclerView.adapter as BaseBankAdapter
         val itemIndex = adapter.getItemIndexByCurrency(currency)
@@ -55,5 +79,11 @@ class MainActivity : AppCompatActivity() {
         } else {
             adapter.clearSelection()
         }
+    }
+
+    private fun setDateToTextView(textView: TextView, year: Int, month: Int, day: Int) {
+        val content = SpannableString("$day.${month + 1}.$year")
+        content.setSpan(UnderlineSpan(), 0, content.length, 0)
+        textView.text = content
     }
 }

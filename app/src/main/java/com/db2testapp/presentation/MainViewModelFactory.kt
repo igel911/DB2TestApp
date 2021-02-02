@@ -1,10 +1,10 @@
-package com.db2testapp.presentation.adapter
+package com.db2testapp.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.db2testapp.domain.repository.BankRepository
 import com.db2testapp.domain.usecase.BankUseCase
-import com.db2testapp.presentation.MainViewModel
+import com.db2testapp.presentation.main.MainViewModel
 
 class MainViewModelFactory(private val repository: BankRepository) : ViewModelProvider.Factory {
 

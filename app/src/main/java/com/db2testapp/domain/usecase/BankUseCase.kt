@@ -6,11 +6,21 @@ import com.db2testapp.domain.repository.BankRepository
 
 class BankUseCase(private val repository: BankRepository) {
 
-    suspend fun getPbItems(): List<PbItem> {
-        return repository.getPbItems()
+    suspend fun getPbItems(year: Int = 2015, month: Int = 1, day: Int = 1): List<PbItem> {
+        val date = getDateString(day)
+            .plus(".")
+            .plus(getDateString(month + 1))
+            .plus(".")
+            .plus(year.toString())
+        return repository.getPbItems(date)
     }
 
-    suspend fun getNbuItems(): List<NbuItem> {
-        return repository.getNbuItems()
+    suspend fun getNbuItems(year: Int = 2015, month: Int = 1, day: Int = 1): List<NbuItem> {
+        val date = "$year"
+            .plus(getDateString(month + 1))
+            .plus(getDateString(day))
+        return repository.getNbuItems(date)
     }
+
+    private fun getDateString(date: Int): String = if (date < 10) "0$date" else date.toString()
 }

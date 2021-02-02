@@ -1,4 +1,4 @@
-package com.db2testapp.presentation
+package com.db2testapp.presentation.main
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -21,6 +21,13 @@ class MainViewModel(private val useCase: BankUseCase) : ViewModel() {
         viewModelScope.launch(Dispatchers.IO) {
             _liveDataPb.postValue(useCase.getPbItems())
             _liveDataNbu.postValue(useCase.getNbuItems())
+        }
+    }
+
+    fun getBankCoursesByDate(year: Int, month: Int, day: Int) {
+        viewModelScope.launch(Dispatchers.IO) {
+            _liveDataPb.postValue(useCase.getPbItems(year, month, day))
+            _liveDataNbu.postValue(useCase.getNbuItems(year, month, day))
         }
     }
 }

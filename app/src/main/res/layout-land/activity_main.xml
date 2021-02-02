@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:padding="@dimen/material_padding_normal"
+    tools:context=".presentation.main.MainActivity"
+    android:baselineAligned="false">
+
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_marginEnd="@dimen/material_padding_small"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <include
+            android:id="@+id/include_header_pb"
+            layout="@layout/header_with_calendar" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/material_padding_normal"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/TextViewPbHeaderStyle"
+                android:text="@string/tv_currency" />
+
+            <TextView
+                style="@style/TextViewPbHeaderStyle"
+                android:gravity="center_horizontal"
+                android:text="@string/tv_purchase_rate" />
+
+            <TextView
+                style="@style/TextViewPbHeaderStyle"
+                android:gravity="end"
+                android:text="@string/tv_sale_rate" />
+
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view_pb"
+            style="@style/RV_Style"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_marginStart="@dimen/material_padding_small"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <include
+            android:id="@+id/include_header_nbu"
+            layout="@layout/header_with_calendar" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view_nbu"
+            style="@style/RV_Style"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+    </LinearLayout>
+
+</LinearLayout>

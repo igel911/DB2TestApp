@@ -34,43 +34,47 @@ class MainActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.includeHeaderPb.textViewBankName.text = getString(R.string.pb_name)
-        binding.includeHeaderNbu.textViewBankName.text = getString(R.string.nbu_name)
+        with(binding) {
+            includeHeaderPb.textViewBankName.text = getString(R.string.pb_name)
+            includeHeaderNbu.textViewBankName.text = getString(R.string.nbu_name)
 
-        binding.includeHeaderPb.imageViewCalendar.setOnClickListener {
-            DatePickerFragment().show(supportFragmentManager, "datePickerPb")
-        }
-        binding.includeHeaderNbu.imageViewCalendar.setOnClickListener {
-            DatePickerFragment().show(supportFragmentManager, "datePickerNbu")
+            includeHeaderPb.imageViewCalendar.setOnClickListener {
+                DatePickerFragment().show(supportFragmentManager, "datePickerPb")
+            }
+            includeHeaderNbu.imageViewCalendar.setOnClickListener {
+                DatePickerFragment().show(supportFragmentManager, "datePickerNbu")
 
-        }
+            }
 
-        val pbAdapter = PbAdapter { currency ->
-            setSelectedItem(binding.recyclerViewNbu, currency)
-        }
-        binding.recyclerViewPb.apply {
-            adapter = pbAdapter
-            addItemDecoration(ItemDecoratorBank())
-        }
+            val pbAdapter = PbAdapter { currency ->
+                setSelectedItem(recyclerViewNbu, currency)
+            }
+            recyclerViewPb.apply {
+                adapter = pbAdapter
+                addItemDecoration(ItemDecoratorBank())
+            }
 
-        val nbuAdapter = NbuAdapter { currency ->
-            setSelectedItem(binding.recyclerViewPb, currency)
-        }
-        binding.recyclerViewNbu.apply {
-            adapter = nbuAdapter
-            addItemDecoration(ItemDecoratorBank())
-        }
+            val nbuAdapter = NbuAdapter { currency ->
+                setSelectedItem(recyclerViewPb, currency)
+            }
+            recyclerViewNbu.apply {
+                adapter = nbuAdapter
+                addItemDecoration(ItemDecoratorBank())
+            }
 
-        viewModel.liveDataPb.observe(this@MainActivity) { pbAdapter.setList(it) }
-        viewModel.liveDataNbu.observe(this@MainActivity) { nbuAdapter.setList(it) }
+            viewModel.liveDataPb.observe(this@MainActivity) { pbAdapter.setList(it) }
+            viewModel.liveDataNbu.observe(this@MainActivity) { nbuAdapter.setList(it) }
+        }
 
         viewModel.getBankCourses()
     }
 
     override fun onDateSet(view: DatePicker, year: Int, month: Int, day: Int) {
-        setDateToTextView(binding.includeHeaderPb.textViewDate, year, month, day)
-        setDateToTextView(binding.includeHeaderNbu.textViewDate, year, month, day)
-        viewModel.getBankCoursesByDate(year, month, day)
+        with(binding) {
+            setDateToTextView(includeHeaderPb.textViewDate, year, month, day)
+            setDateToTextView(includeHeaderNbu.textViewDate, year, month, day)
+            viewModel.getBankCoursesByDate(year, month, day)
+        }
     }
 
     private fun setSelectedItem(recyclerView: RecyclerView, currency: String) {

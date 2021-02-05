@@ -33,34 +33,32 @@ class MainActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
         binding.includeHeaderNbu.textViewBankName.text = getString(R.string.nbu_name)
 
         binding.includeHeaderPb.imageViewCalendar.setOnClickListener {
-            val newFragment = DatePickerFragment()
-            newFragment.show(supportFragmentManager, "datePickerPb")
+            DatePickerFragment().show(supportFragmentManager, "datePickerPb")
         }
         binding.includeHeaderNbu.imageViewCalendar.setOnClickListener {
-            val newFragment = DatePickerFragment()
-            newFragment.show(supportFragmentManager, "datePickerNbu")
+            DatePickerFragment().show(supportFragmentManager, "datePickerNbu")
 
         }
 
-        viewModel.liveDataPb.observe(this@MainActivity) {
-            val pbAdapter = PbAdapter(it) { currency ->
-                setSelectedItem(binding.recyclerViewNbu, currency)
-            }
-            binding.recyclerViewPb.apply {
-                adapter = pbAdapter
-                addItemDecoration(ItemDecoratorBank())
-            }
+        val pbAdapter = PbAdapter { currency ->
+            setSelectedItem(binding.recyclerViewNbu, currency)
+        }
+        binding.recyclerViewPb.apply {
+            adapter = pbAdapter
+            addItemDecoration(ItemDecoratorBank())
         }
 
-        viewModel.liveDataNbu.observe(this@MainActivity) {
-            val nbuAdapter = NbuAdapter(it) { currency ->
-                setSelectedItem(binding.recyclerViewPb, currency)
-            }
-            binding.recyclerViewNbu.apply {
-                adapter = nbuAdapter
-                addItemDecoration(ItemDecoratorBank())
-            }
+        val nbuAdapter = NbuAdapter { currency ->
+            setSelectedItem(binding.recyclerViewPb, currency)
         }
+        binding.recyclerViewNbu.apply {
+            adapter = nbuAdapter
+            addItemDecoration(ItemDecoratorBank())
+        }
+
+        viewModel.liveDataPb.observe(this@MainActivity) { pbAdapter.setList(it) }
+        viewModel.liveDataNbu.observe(this@MainActivity) { nbuAdapter.setList(it) }
+        
         viewModel.getBankCourses()
     }
 

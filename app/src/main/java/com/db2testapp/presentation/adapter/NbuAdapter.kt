@@ -8,9 +8,8 @@ import com.db2testapp.databinding.ItemNbuBinding
 import com.db2testapp.data.vo.NbuItem
 
 class NbuAdapter(
-    dataSet: List<NbuItem>,
     onClick: (currency: String) -> Unit
-) : BaseBankAdapter<NbuAdapter.ViewHolder>(dataSet, onClick) {
+) : BaseBankAdapter<NbuAdapter.ViewHolder>(onClick) {
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int) =
         ViewHolder(

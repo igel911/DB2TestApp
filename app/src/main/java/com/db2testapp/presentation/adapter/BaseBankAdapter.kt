@@ -4,9 +4,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.db2testapp.data.vo.BankItem
 
 abstract class BaseBankAdapter<T : RecyclerView.ViewHolder>(
-    val dataSet: List<BankItem>,
     private val onClick: (currency: String) -> Unit
 ) : RecyclerView.Adapter<T>() {
+
+    var dataSet: List<BankItem> = emptyList()
 
     fun getItemIndexByCurrency(currency: String) =
         dataSet.indexOfFirst { it.currency == currency }
@@ -27,6 +28,11 @@ abstract class BaseBankAdapter<T : RecyclerView.ViewHolder>(
         item.isSelected = true
         notifyItemChanged(position)
         onClick.invoke(item.currency)
+    }
+
+    fun setList(dataSet: List<BankItem>) {
+        this.dataSet = dataSet
+        notifyDataSetChanged()
     }
 
     override fun getItemCount() = dataSet.size

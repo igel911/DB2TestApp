@@ -8,9 +8,8 @@ import com.db2testapp.data.vo.PbItem
 import com.db2testapp.databinding.ItemPbBinding
 
 class PbAdapter(
-    dataSet: List<PbItem>,
     onClick: (currency: String) -> Unit
-) : BaseBankAdapter<PbAdapter.ViewHolder>(dataSet, onClick) {
+) : BaseBankAdapter<PbAdapter.ViewHolder>(onClick) {
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int) =
         ViewHolder(

@@ -6,11 +6,15 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.db2testapp.data.vo.NbuItem
 import com.db2testapp.data.vo.PbItem
-import com.db2testapp.domain.usecase.BankUseCase
+import com.db2testapp.domain.usecase.NbuUseCase
+import com.db2testapp.domain.usecase.PbUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class MainViewModel(private val useCase: BankUseCase) : ViewModel() {
+class MainViewModel(
+    private val pbUseCase: PbUseCase,
+    private val nbuUseCase: NbuUseCase
+) : ViewModel() {
 
     private val _liveDataPb = MutableLiveData<List<PbItem>>()
     val liveDataPb: LiveData<List<PbItem>> = _liveDataPb
@@ -19,15 +23,15 @@ class MainViewModel(private val useCase: BankUseCase) : ViewModel() {
 
     fun getBankCourses() {
         viewModelScope.launch(Dispatchers.IO) {
-            _liveDataPb.postValue(useCase.getPbItems())
-            _liveDataNbu.postValue(useCase.getNbuItems())
+            _liveDataPb.postValue(pbUseCase.getPbItems())
+            _liveDataNbu.postValue(nbuUseCase.getNbuItems())
         }
     }
 
     fun getBankCoursesByDate(year: Int, month: Int, day: Int) {
         viewModelScope.launch(Dispatchers.IO) {
-            _liveDataPb.postValue(useCase.getPbItems(year, month, day))
-            _liveDataNbu.postValue(useCase.getNbuItems(year, month, day))
+            _liveDataPb.postValue(pbUseCase.getPbItems(year, month, day))
+            _liveDataNbu.postValue(nbuUseCase.getNbuItems(year, month, day))
         }
     }
 }

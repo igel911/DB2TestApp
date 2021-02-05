@@ -12,6 +12,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.db2testapp.BankApp
 import com.db2testapp.R
 import com.db2testapp.databinding.ActivityMainBinding
+import com.db2testapp.domain.usecase.NbuUseCase
+import com.db2testapp.domain.usecase.PbUseCase
 import com.db2testapp.presentation.DatePickerFragment
 import com.db2testapp.presentation.MainViewModelFactory
 import com.db2testapp.presentation.adapter.*
@@ -21,7 +23,10 @@ class MainActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
 
     private lateinit var binding: ActivityMainBinding
     private val viewModel: MainViewModel by viewModels {
-        MainViewModelFactory(BankApp.bankApiRepository)
+        MainViewModelFactory(
+            PbUseCase(BankApp.bankApiRepository),
+            NbuUseCase(BankApp.bankApiRepository)
+        )
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -58,7 +63,7 @@ class MainActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
 
         viewModel.liveDataPb.observe(this@MainActivity) { pbAdapter.setList(it) }
         viewModel.liveDataNbu.observe(this@MainActivity) { nbuAdapter.setList(it) }
-        
+
         viewModel.getBankCourses()
     }
 

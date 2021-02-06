@@ -4,3 +4,6 @@
  
  # Technologies
  Kotlin, MVVM, Clean Architekture, kotlin coroutines, Retrofit.
+
+ # DI
+ Koin(branch koin)

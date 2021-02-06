@@ -7,15 +7,15 @@ import com.db2testapp.data.vo.NbuItem
 import com.db2testapp.data.vo.PbItem
 import com.db2testapp.domain.repository.BankRepository
 
-class BankApiRepository : BankRepository {
+class BankApiRepository(private val apiClient: BankApiClient) : BankRepository {
 
     override suspend fun getPbItems(date: String): List<PbItem> {
-        val dto = BankApiClient.pbApiClient.getPbItems(date = date)
+        val dto = apiClient.pbApiClient.getPbItems(date = date)
         return PbMapper.toValueObject(dto)
     }
 
     override suspend fun getNbuItems(date: String): List<NbuItem> {
-        val dtoList = BankApiClient.nbuApiClient.getNbuItems(date = date)
+        val dtoList = apiClient.nbuApiClient.getNbuItems(date = date)
         return NbuMapper.toValueObject(dtoList)
     }
 

@@ -6,7 +6,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-object BankApiClient {
+class BankApiClient {
 
     private var client: OkHttpClient = OkHttpClient.Builder()
         .addInterceptor(HttpLoggingInterceptor(CustomHttpLogging()).apply {

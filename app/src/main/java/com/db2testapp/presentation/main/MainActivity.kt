@@ -6,28 +6,19 @@ import android.text.SpannableString
 import android.text.style.UnderlineSpan
 import android.widget.DatePicker
 import android.widget.TextView
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
-import com.db2testapp.BankApp
 import com.db2testapp.R
 import com.db2testapp.databinding.ActivityMainBinding
-import com.db2testapp.domain.usecase.NbuUseCase
-import com.db2testapp.domain.usecase.PbUseCase
 import com.db2testapp.presentation.DatePickerFragment
-import com.db2testapp.presentation.MainViewModelFactory
 import com.db2testapp.presentation.adapter.*
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 class MainActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
 
     private lateinit var binding: ActivityMainBinding
-    private val viewModel: MainViewModel by viewModels {
-        MainViewModelFactory(
-            PbUseCase(BankApp.bankApiRepository),
-            NbuUseCase(BankApp.bankApiRepository)
-        )
-    }
+    private val viewModel: MainViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

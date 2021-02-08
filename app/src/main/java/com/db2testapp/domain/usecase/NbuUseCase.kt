@@ -2,8 +2,9 @@ package com.db2testapp.domain.usecase
 
 import com.db2testapp.data.vo.NbuItem
 import com.db2testapp.domain.repository.BankRepository
+import javax.inject.Inject
 
-class NbuUseCase(private val repository: BankRepository) : BankUseCase() {
+class NbuUseCase @Inject constructor(private val repository: BankRepository) : BankUseCase() {
 
     suspend fun getNbuItems(year: Int = 2015, month: Int = 1, day: Int = 1): List<NbuItem> {
         val date = "$year"

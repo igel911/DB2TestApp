@@ -10,8 +10,9 @@ import com.db2testapp.domain.usecase.NbuUseCase
 import com.db2testapp.domain.usecase.PbUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class MainViewModel(
+class MainViewModel @Inject constructor(
     private val pbUseCase: PbUseCase,
     private val nbuUseCase: NbuUseCase
 ) : ViewModel() {

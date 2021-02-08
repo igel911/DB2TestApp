@@ -1,18 +1,18 @@
 package com.db2testapp
 
-import android.app.Application
-import com.db2testapp.data.repository.BankApiRepository
+import com.db2testapp.di.ApplicationComponent
+import com.db2testapp.di.DaggerApplicationComponent
+import dagger.android.AndroidInjector
+import dagger.android.DaggerApplication
 
-class BankApp : Application() {
+class BankApp : DaggerApplication() {
 
-    override fun onCreate() {
-        super.onCreate()
-        instance = this
-    }
+    override fun applicationInjector(): AndroidInjector<out DaggerApplication> {
+        val appComponent: ApplicationComponent = DaggerApplicationComponent.builder()
+            .application(this)
+            .build()
 
-    companion object {
-        var instance: BankApp? = null
-            private set
-        val bankApiRepository = BankApiRepository()
+        appComponent.inject(this)
+        return appComponent
     }
 }

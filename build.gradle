@@ -37,6 +37,7 @@ ext {
     retrofitVersion = '2.9.0'
     gsonVersion = '2.8.6'
     logInterseptorVersion = '4.7.2'
+    daggerVersion = '2.31.2'
 
     junitVersion = '4.13.1'
     junitExtVersion = '1.1.2'

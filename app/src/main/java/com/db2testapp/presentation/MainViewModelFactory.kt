@@ -2,12 +2,12 @@ package com.db2testapp.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.db2testapp.domain.repository.BankRepository
 import com.db2testapp.domain.usecase.NbuUseCase
 import com.db2testapp.domain.usecase.PbUseCase
 import com.db2testapp.presentation.main.MainViewModel
+import javax.inject.Inject
 
-class MainViewModelFactory(
+class MainViewModelFactory @Inject constructor(
     private val pbUseCase: PbUseCase,
     private val nbuUseCase: NbuUseCase
 ) : ViewModelProvider.Factory {
